@@ -21,13 +21,13 @@ public class Driver {
             browser = browser.toLowerCase();
             switch (browser) {
                 case "chrome":
-                    WebDriverManager.chromedriver().version("79").setup();
+                    WebDriverManager.chromedriver().setup();
                     return new ChromeDriver();
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
                     return new FirefoxDriver();
                 case "chrome-headless":
-                    WebDriverManager.chromedriver().version("79").setup();
+                    WebDriverManager.chromedriver().setup();
                     return new ChromeDriver(new ChromeOptions().setHeadless(true));
                 case "firefox-headless":
                     WebDriverManager.firefoxdriver().setup();
@@ -37,7 +37,7 @@ public class Driver {
         return null;
     }
 
-    public static void quit() {
+    public static void closeDriver() {
         if (driver != null) {
             driver.quit();
             driver = null;

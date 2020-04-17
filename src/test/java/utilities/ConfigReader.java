@@ -21,22 +21,19 @@ public class ConfigReader {
             properties = new Properties();
             // properties class can read byte code so we need the file as byte code
             properties.load(fileInputStream);
-
         } catch (Exception e) {
-            System.out.println("The config file did not load");
             e.printStackTrace();
+            throw new RuntimeException("Failed to load properties file!");
         }
     }
 
+    /**
+     * This method returns property value from configuration.properties file
+     * @param key property name
+     * @return property value
+     */
     public static String getProperty(String key) {
         return properties.getProperty(key);
     }
 
-//    public static void main (String [] args){
-//        System.out.println(ConfigReader.getProperty("browser"));
-    /**
-     *
-     */
-//        System.out.println(ConfigReader.getProperty("hello"));
-//    }
 }
