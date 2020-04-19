@@ -47,18 +47,18 @@ public class Tests {
         actions.moveToElement(testersMeeting).pause(2000).perform();
         WebElement testersMeetingView = driver.findElement(By.cssSelector("[href='/calendar/event/view/1846']"));
         WebElement testersMeetingEdit = driver.findElement(By.cssSelector("[href='/calendar/event/update/1846']"));
+        WebElement testersMeetingDelete = driver.findElement(By.xpath("//*[@href='/calendar/event/update/1846']/following::li[1]/a"));
+
+        testersMeetingDelete.click();
 
         BrowserUtils.wait(2);
 
-        System.out.println("Testers Meeting View is available: " + testersMeetingView.isEnabled());
-        System.out.println("Testers Meeting Edit is available: " + testersMeetingEdit.isEnabled());
+        driver.findElement(By.cssSelector("[class='btn cancel']")).click();
 
-//        WebElement testersMeetingDelete = driver.findElement(By.xpath("//td[text()='Testers Meeting']/..//a[@title='Delete']"));
-//        WebElement testersMeetingDelete = driver.findElement(By.xpath("(//td[text()='Testers Meeting'])[1]/..//a[@title='Delete']"));
-//        driver.findElement(By.xpath("//td[text()='Testers Meeting']/..//a[@href='#']")).click();
-//        actions.moveToElement(testersMeetingDelete).pause(3000).perform();
-//        System.out.println(testersMeetingDelete.isEnabled());
-//        testersMeetingView.isEnabled();
+        System.out.println("Testers Meeting View option is available: " + testersMeetingView.isEnabled());
+        System.out.println("Testers Meeting Edit option is available: " + testersMeetingEdit.isEnabled());
+        System.out.println("Testers Meeting Delete option is available: " + testersMeetingDelete.isEnabled());
+
 
     }
 
