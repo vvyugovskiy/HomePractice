@@ -14,7 +14,6 @@ public class ConfigReader {
 
     static {
         // try with resource -> try/catch block can take a parameter, AutoClosable
-
         try (FileInputStream fileInputStream = new FileInputStream("config.properties")) {
             // file Reader as byte code
             // FileInputStream here is our configFile as Byte code

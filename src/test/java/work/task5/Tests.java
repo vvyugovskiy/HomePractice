@@ -24,10 +24,12 @@ public class Tests {
     protected Actions actions;
     private By usernameBy = By.id("prependedInput");
     private By passwordBy = By.id("prependedInput2");
+    private By logInBy = By.id("_submit");
     private By activitiesBy = By.xpath("//span[@class='title title-level-1' and contains(text(),'Activities')]");
     private By toCalendarEventBy = By.linkText("Calendar Events");
     private By createCalendarEventBy = By.cssSelector("[title='Create Calendar event']");
     private By repeatCheckboxBy = By.cssSelector("[id^='recurrence-repeat-view']");
+    private By testersMeetingBy = By.xpath("(//td[text()='Testers Meeting'])[1]//../td[9]");
 
     /**
      * 1. Go to “https://qa1.vytrack.com/"
@@ -42,7 +44,7 @@ public class Tests {
         BrowserUtils.wait(3);
         driver.findElement(toCalendarEventBy).click();
         BrowserUtils.wait(3);
-        WebElement testersMeeting = driver.findElement(By.xpath("(//td[text()='Testers Meeting'])[1]//../td[9]"));
+        WebElement testersMeeting = driver.findElement(testersMeetingBy);
 
         actions.moveToElement(testersMeeting).pause(2000).perform();
         WebElement testersMeetingView = driver.findElement(By.cssSelector("[href='/calendar/event/view/1846']"));
@@ -55,9 +57,13 @@ public class Tests {
 
         driver.findElement(By.cssSelector("[class='btn cancel']")).click();
 
-        System.out.println("Testers Meeting View option is available: " + testersMeetingView.isEnabled());
-        System.out.println("Testers Meeting Edit option is available: " + testersMeetingEdit.isEnabled());
-        System.out.println("Testers Meeting Delete option is available: " + testersMeetingDelete.isEnabled());
+        Assert.assertTrue(testersMeetingView.isEnabled(),"View option is not active");
+        Assert.assertTrue(testersMeetingEdit.isEnabled(),"Edit option is not active");
+        Assert.assertTrue(testersMeetingDelete.isEnabled(),"Delete option is not active");
+//
+//        System.out.println("Testers Meeting View option is available: " + testersMeetingView.isEnabled());
+//        System.out.println("Testers Meeting Edit option is available: " + testersMeetingEdit.isEnabled());
+//        System.out.println("Testers Meeting Delete option is available: " + testersMeetingDelete.isEnabled());
 
 
     }
@@ -69,7 +75,7 @@ public class Tests {
      * 5.Deselect all options except “Title”
      * 6.Verify that “Title” column still displayed
      */
-    @Test(description = "Test CAse #2")
+    @Test(description = "Test Case #2")
     public void test2() {
         actions.moveToElement(driver.findElement(activitiesBy)).perform();
         BrowserUtils.wait(3);
@@ -423,7 +429,9 @@ public class Tests {
 
         BrowserUtils.wait(2);
         driver.findElement(usernameBy).sendKeys(ConfigReader.getProperty("username"));
-        driver.findElement(passwordBy).sendKeys(ConfigReader.getProperty("password"), Keys.ENTER);
+        driver.findElement(passwordBy).sendKeys(ConfigReader.getProperty("password"));
+        BrowserUtils.wait(2);
+        driver.findElement(logInBy).click();
         BrowserUtils.wait(2);
     }
 
